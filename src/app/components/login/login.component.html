@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Enter your credentials</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()"> 
+        <div class="mb-3">
+            <label class="form-label">Email address</label>
+            <input 
+                type="email" 
+                class="form-control" 
+                [ngClass]="loginForm.get('email')?.touched && loginForm.get('email')?.errors ? 'is-invalid' : ''"
+                formControlName="email" 
+            >
+            <div class="invalid-feedback">
+                {{loginForm.get('email')?.hasError('required') ? 'Email is required!' : ''}}
+                {{loginForm.get('email')?.hasError('email') ? 'Invalid email!' : ''}}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input 
+                type="password" 
+                class="form-control" 
+                formControlName="password"
+                [ngClass]="loginForm.get('password')?.touched && loginForm.get('password')?.errors ? 'is-invalid' : ''"
+            >
+            <div class="invalid-feedback">
+                {{loginForm.get('password')?.hasError('required') ? 'Password is required!' : ''}}
+                {{loginForm.get('password')?.hasError('minlength') ? 'Password must be at least 8 characters!' : ''}}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+    </form>
+</div>
