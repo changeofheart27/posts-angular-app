@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderModule } from 'ngx-order-pipe';
-import { FilterPipeModule } from 'ngx-filter-pipe';
+import { FilterModule } from '@josee9988/filter-pipe-ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PostsComponent } from './components/posts/posts.component';
@@ -14,7 +14,14 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component'
 
 @NgModule({
-  declarations: [AppComponent, PostsComponent, HomeComponent, PostDetailComponent, LoginComponent, ProfileComponent],
+  declarations: [
+    AppComponent,
+    PostsComponent,
+    HomeComponent,
+    PostDetailComponent,
+    LoginComponent,
+    ProfileComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,7 +29,7 @@ import { ProfileComponent } from './components/profile/profile.component'
     FormsModule,
     ReactiveFormsModule,
     OrderModule,
-    FilterPipeModule,
+    FilterModule,
     NgbModule,
   ],
   providers: [],

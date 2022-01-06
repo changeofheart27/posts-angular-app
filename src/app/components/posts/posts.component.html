@@ -1,5 +1,5 @@
 <h2>Posts</h2>
-<input type="text" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="Search by title or body">
+<input type="text" [(ngModel)]="searchTerm" placeholder="Search by title or body">
 <br>
 <table class="table table-striped">
     <thead>
@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let post of posts | orderBy: orderHeader : isDescOrder">
+        <tr *ngFor="let post of posts | orderBy: orderHeader : isDescOrder | filterPipe: searchTerm">
             <th scope="row">{{ post.id }}</th>
             <td>{{ post.title }}</td>
             <td>{{ post.body }}</td>

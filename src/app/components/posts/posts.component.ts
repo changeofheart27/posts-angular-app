@@ -13,11 +13,10 @@ export class PostsComponent implements OnInit {
   posts: Post[] = [];
   orderHeader: string = '';
   isDescOrder: boolean = true;
-  searchTerm: any;
+  searchTerm!: string;
   filter = new FormControl('');
   
-  constructor(private postService: PostService) {
-  }
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
     this.getPosts();
@@ -26,23 +25,6 @@ export class PostsComponent implements OnInit {
   sort(headerName: string): void {
     this.orderHeader = headerName;
     this.isDescOrder = !this.isDescOrder;
-  }
-
-  search(): void {
-    if (this.searchTerm === '') {
-      this.ngOnInit();
-    } else {
-      this.posts = this.posts.filter((post) => {
-        return (
-          post.title
-            .toLocaleLowerCase()
-            .match(this.searchTerm.toLocaleLowerCase()) ||
-          post.body
-            .toLocaleLowerCase()
-            .match(this.searchTerm.toLocaleLowerCase())
-        );
-      });
-    }
   }
 
   getPosts(): void {

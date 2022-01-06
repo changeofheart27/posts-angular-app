@@ -13,16 +13,18 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(8),])
   });
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {}
+  constructor(private fb: FormBuilder, public loginService: LoginService) {}
 
   ngOnInit(): void {}
 
   login(): void {
     const val = this.loginForm.value;
     if (this.loginForm.valid) {
-      this.loginService.login(val.email, val.password).subscribe(res => {
-        console.log(res);
-      });
+      // use this code if POST api call does not return any error
+      // this.loginService.login(val.email, val.password).subscribe(res => {
+      //   console.log(res);
+      // });
+      this.loginService.login().subscribe(res => console.log(res));
     }
   }
 }

@@ -1,10 +1,9 @@
-<div *ngIf="loginService.isLoggedIn$ | async">
+<div *ngIf="(loginService.isLoggedIn$ | async); else login">
     <h2>User Profile</h2>
     <p>Username: {{profile.name}}</p>
     <p>Created At: {{profile.createdAt}}</p>
 </div>
-<div *ngIf="!loginService.isLoggedIn$">
-    <ng-template>
-        <app-login></app-login>
-    </ng-template>
-</div>
+<ng-template #login>
+    <h2>You need to login to continue!</h2>
+    <app-login></app-login>
+</ng-template>

@@ -29,4 +29,8 @@
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
     </form>
+    <br>
+    <div class="alert alert-success" role="alert" *ngIf="loginService.isLoggedIn$ | async">
+        Login success
+    </div>
 </div>

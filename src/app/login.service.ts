@@ -16,14 +16,29 @@ export class LoginService {
     this._isLoggedIn$.next(!!token);
   }
 
-  login(email: string, password: string): Observable<any> {
+  // // use this method if POST api call does not return any error
+  // login(email: string, password: string): Observable<any> {
+  //   const url = `${this.baseUrl}/tokens`;
+  //   return this.http
+  //     .post<{ token: string; userId: string }>(url, { email, password })
+  //     .pipe(
+  //       tap((response) => {
+  //         console.log('LoginService: Logged in!');
+  //         this._isLoggedIn$.next(true);
+  //         localStorage.setItem('token', response.token);
+  //         localStorage.setItem('userId', response.userId);
+  //       })
+  //     );
+  // }
+
+  // alternative login
+  login(): Observable<any> {
     const url = `${this.baseUrl}/tokens`;
     return this.http
-      .post<{ token: string; userId: string }>(url, { email, password })
+      .get<{ token: string; userId: string }>(url)
       .pipe(
         tap((response) => {
           console.log('LoginService: Logged in!');
-          alert("Logged in sucessful!");
           this._isLoggedIn$.next(true);
           localStorage.setItem('token', response.token);
           localStorage.setItem('userId', response.userId);
@@ -32,6 +47,7 @@ export class LoginService {
   }
 
   logout(): void {
+    this._isLoggedIn$.next(false);
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     console.log('LoginService: Logged out!');
@@ -43,10 +59,10 @@ export class LoginService {
     const userId = Number(localStorage.getItem('userId'));
     const url = `${this.baseUrl}/users/${userId}`;
     return this.http
-      .get<{ createdAt: string, name: string, id: string}>(url)
+      .get<{ createdAt: string; name: string; id: string }>(url)
       .pipe(
-        tap(response => {
-          console.log('LoginService: Get Profile!')
+        tap((response) => {
+          console.log('LoginService: Get Profile!');
           console.log(response);
         })
       );
